@@ -1,0 +1,31 @@
+services:
+
+  api:
+    build: 
+      context: .
+      dockerfile: Containerfile
+    container_name: rag-api
+    ports:
+      - "8000:8000"
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+      DEVICE: cpu
+      LLM_MODEL: qwen3:4b
+    volumes:
+      - chroma_data:/app/chroma
+    depends_on:
+      - ollama
+    restart: unless-stopped
+
+  ollama:
+    image: docker.io/ollama/ollama:latest
+    container_name: rag-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+
+volumes:
+  chroma_data:
+  ollama_data:

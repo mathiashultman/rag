@@ -1,0 +1,9 @@
+podman volume create rag-data
+
+podman build -t my-rag:1.0 .
+
+podman run -d \
+  --name my-rag \
+  -p 8000:8000 \
+  -v rag-data:/app/chroma \
+  my-rag:1.0
