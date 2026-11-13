@@ -14,7 +14,7 @@ ollama_client = Client(
     host=os.getenv("OLLAMA_HOST", "http://ollama:11434")
 )
 
-with open("mine.html", encoding="utf-8") as f:
+with open("homepage.html", encoding="utf-8") as f:
     html = f.read()
 
 text = trafilatura.extract(html)
@@ -64,9 +64,6 @@ def health():
 
 @app.get("/")
 def query(query: str = Query(..., min_length=1)):
-    #query = "Vem är VD?"
-    print(query)
-
     query_embedding = model.encode(
         query,
         normalize_embeddings=True
@@ -99,7 +96,6 @@ def query(query: str = Query(..., min_length=1)):
 
     return {
         "query": query,
-        "reponse": response["message"]["content"],
-        "message": "Query received successfully"
+        "reponse": response["message"]["content"]
     }
 

@@ -16,7 +16,7 @@ Everything runs in containers using Podman Compose. No Python or Ollama installa
 
 Clone the repository:
 
-    git clone <REPOSITORY_URL>
+    git clone git@github.com:mathiashultman/rag.git
     cd rag
 
 Build the API image:
@@ -39,7 +39,11 @@ Check API health:
 
     curl http://localhost:8000/health
 
-Ask a question:
+Point your browser to:
+
+    http://localhost:8000/?query=vem är vd
+
+Or ask a question via curl:
 
     curl --get \
       --data-urlencode "query=Vem är VD?" \
